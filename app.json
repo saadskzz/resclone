@@ -4,12 +4,12 @@
     "slug": "resfrontend",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/mcSplach.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/mcSplach.png",
-      "resizeMode": "contain",
+      "resizeMode":"stretch",
       "backgroundColor": "#ffffff"
     },
     "ios": {
@@ -19,6 +19,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/mcSplach.png",
         "backgroundColor": "#ffffff"
+      
       }
     },
     "web": {
