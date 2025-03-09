@@ -9,21 +9,33 @@ import store from './Store/store'
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FoodDetails from './Components/FoodDetails';
 import Cart from './Components/Cart';
+import Map from './Components/Map';
+import AdminMenu from './Components/AdminMenu';
+import Header from './Components/Header';
+import Order from './Components/Order';
+
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <Provider store={store}>
     <NavigationContainer>
       <Stack.Navigator>
-   
-
         <Stack.Screen component={Auth} name='Auth' options={{headerShown:false}}/>
-        <Stack.Screen component={MenuPage} name='Menu' options={{headerRight:()=><AntDesign name="shoppingcart" size={24} color="black" />,headerLeft:()=>'',headerTitle:'' }}/>
+        <Stack.Screen 
+          component={MenuPage} 
+          name='Menu' 
+          options={{ 
+            headerRight: () => <Header />, 
+            headerLeft: () => '', 
+            headerTitle: '' 
+          }}
+        />
         <Stack.Screen component={FoodDetails} name='FoodDetail'  options={{headerShown:false}} />
         <Stack.Screen component={Cart} name='Cart'/>
+        <Stack.Screen component={Map} name='Map'/>
+        <Stack.Screen component={AdminMenu} name='AdminMenu'/>
+        <Stack.Screen component={Order} name='Order'/>
       </Stack.Navigator>
-
-      
     </NavigationContainer>
     </Provider>
   );

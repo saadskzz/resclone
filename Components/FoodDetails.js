@@ -8,6 +8,7 @@ import { useSelector,useDispatch } from 'react-redux'
 function FoodDetails() {
     const dispatch = useDispatch();
     const items = useSelector(state=>state.cart.items);
+    const totalbill = items.reduce((acc,curr) =>{ return acc + curr.quantity*curr.price},0)
 const [quantity,setQuantity] = useState(1)
 const increaseQuantity =()=> {
     setQuantity((prevQuantity)=>prevQuantity+1)
@@ -27,7 +28,7 @@ console.log('decreased qy',quantity)
   <Image style={styles.detailbgimg} source={DetailBg} />
   <View style={styles.detailimg}>
       <Image style={{width:'100%',height:'100%',borderRadius:100}} 
-      source={{uri:`http://192.168.1.10:7464/${item.foodPic.replace(/\\/,'/')}`}}
+      source={{uri:`http://192.168.1.13:7464/${item.foodPic.replace(/\\/,'/')}`}}
       />
     </View>
    

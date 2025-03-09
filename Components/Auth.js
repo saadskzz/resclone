@@ -17,6 +17,7 @@ function Auth() {
   const [password,setPassword] = useState('');
   const [passwordConfirm,setPasswordConfirm] = useState('');
   const [authState,setAuthstate] = useState('Sign In');
+  
   const { setItem } = useAsyncStorage("token");
   const [userLogin] = useLoginUserMutation();
   const handleLogin= async()=>{
@@ -29,7 +30,8 @@ function Auth() {
     console.log(data,'token',data.token)
     if(data.token){
     await setItem(data.token);
-    navigation.navigate('Menu')
+    data.User.role==='customer'? navigation.navigate('Menu'): navigation.navigate('AdminMenu')
+    
     }
   }catch(err){
     console.log(err.message)
@@ -59,7 +61,6 @@ const BgColor = authState === 'Sign In'? "red": "white"
       <Text style={styles.txt(authState)} onPress={()=>setAuthstate('Sign In')}>Sign In</Text>
       <Text style={styles.txt1(authState)} onPress={()=>setAuthstate('Sign Up')}>Sign Up</Text>
       </View>
-      
    
       { authState === 'Sign In' &&  <View style={styles.formStyle}>
     
@@ -76,7 +77,7 @@ const BgColor = authState === 'Sign In'? "red": "white"
 
      <Form placeholder= "User Email"  name="user" value={email} states={setEmail}/>
 
-     <Form placeholder="password"  name="lock" states={setPassword}/>
+     <Form placeholder="password"  name="lock"  states={setPassword}/>
 
      <Form placeholder="password Confirm"  name="lock" states={setPasswordConfirm}/>
      <View style={{marginTop:"20%"}}>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
  
 body:{
  backgroundColor:'black',
- position:'relatice',
+ position:'relative',
  zIndex:-1,
  height:"50%",
   flex:1,

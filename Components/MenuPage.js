@@ -9,15 +9,18 @@ import AppRectangle from "../apprectangle.png"
 import addquant from '../add.png'
 import App from '../App';
 function MenuPage() {
-  const cartItem = useSelector(state=>state.cart.items)
+    const dispatch = useDispatch();
+      
+     
+  const cartItem = useSelector(state=>state.cart.items) 
+  const totalbill = cartItem.reduce((acc,curr) =>{ return acc + curr.quantity*curr.price},0);
   console.log(cartItem,"haha")
-  const dispatch = useDispatch();
-  
+ 
   const { data: foodsData, isLoading: foodsLoading, error: foodsError } = useGetFoodsQuery();
   const { data: categoriesData, isLoading: categoriesLoading, error: categoriesError } = useGetCategoriesQuery();
  const navigation = useNavigation();
 const addToCart = (item)=>{
-  navigation.navigate('Cart',{item})
+  
   dispatch(addCartItems({ itemId: item._id, name: item.name, price: item.price, quantity: 1,foodPic:item.foodPic }))
   console.log('Cart')
 }
@@ -48,7 +51,7 @@ console.log('hello')
    renderItem={({item})=> 
  <View>
     <Pressable key={item._id} style={styles.foocard} onPress={()=>handleFoodClick(item)} >
-      <Image style={{width:100,height:100, alignItems:'center',borderRadius:10}} source={{uri:`http://192.168.1.10:7464/${item.foodPic.replace(/\\/,'/')}`}}/>
+      <Image style={{width:100,height:100, alignItems:'center',borderRadius:10}} source={{uri:`http://192.168.1.13:7464/${item.foodPic.replace(/\\/,'/')}`}}/>
       <Text style={{flexWrap:'wrap',fontWeight:600,fontSize:12}}>{item.name}</Text>
       <View style={{flexDirection:'row',justifyContent:'space-between'}}>
       <Text style={{fontSize:18,fontWeight:700}}>${item.price}</Text>

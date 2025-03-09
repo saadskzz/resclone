@@ -2,8 +2,10 @@ import { View, Text, FlatList, Image, Pressable } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment } from '../Slices/CartSlice';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const Cart = () => {
+  const navigation = useNavigation();
   const dispatch = useDispatch();
   const item = useSelector((state) => state.cart.items);
 
@@ -21,7 +23,7 @@ let totalbill = item.reduce((acc,curr)=>{
               <Image
                 style={{ width: 100, height: 100 }}
                 source={{
-                  uri: `http://192.168.1.10:7464/${item.foodPic.replace(/\\/, '/')}`,
+                  uri: `http://192.168.1.13:7464/${item.foodPic.replace(/\\/, '/')}`,
                 }}
               />
             </View>
@@ -74,7 +76,7 @@ let totalbill = item.reduce((acc,curr)=>{
       <Text  style={{  lineHeight:21.97,fontSize: 16, fontWeight: 400,color:'#8B8B8B' }}>{totalbill}</Text>
       </View>
       <View style={{ backgroundColor: '#D52B1E' ,padding: 10, borderRadius: 5 ,width:'70%'}} >
-        <Text style={{ fontSize: 20,textAlign:'center' ,fontWeight: 600, color: 'white' }}>
+        <Text style={{ fontSize: 20,textAlign:'center' ,fontWeight: 600, color: 'white' }} onPress={()=>navigation.navigate('Order')}>
           Order
         </Text>
       </View>

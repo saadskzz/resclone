@@ -15,7 +15,7 @@ function Form({ placeholder, name,value,states }) {
         placeholderTextColor="white"
         value={value}
         onChangeText={states}
-        
+        keyboardType={name === 'foodprice' ? 'numeric' : 'default'}
       />
     </View>
   );
